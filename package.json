@@ -1,5 +1,5 @@
 {
-  "name": "muven-__AGENT-NAME__",
+  "name": "__MUVEN-AGENT-NAME__",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:dsn-c2b/middleware/muven-__AGENT-NAME__.git"
+    "url": "git@gitlab.com:dsn-c2b/middleware/__MUVEN-AGENT-NAME__.git"
   },
   "author": "C2B Software do Brasil LTDA",
   "license": "ISC",
   "dependencies": {
-    "@c2b/agent-commons": "0.0.13",
-    "@c2b/commons": "0.0.48",
-    "@c2b/muven-audit-core": "^1.0.42",
-    "@c2b/muven-commons": "0.0.11",
-    "@c2b/muven-core": "0.0.296",
-    "@c2b/sdk-tray": "0.0.18",
-    "@c2b/web-commons": "0.0.11",
+    "@c2b/agent-commons": "latest",
+    "@c2b/commons": "latest",
+    "@c2b/muven-audit-core": "latest",
+    "@c2b/muven-commons": "latest",
+    "@c2b/muven-core": "latest",
+    "@c2b/sdk-tray": "latest",
+    "@c2b/web-commons": "latest",
     "@types/axios": "^0.14.0",
     "@types/bluebird": "^3.5.25",
     "@types/moment": "^2.13.0",
