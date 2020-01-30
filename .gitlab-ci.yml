@@ -1,0 +1,41 @@
+image: registry.c2bsoftware.com.br/c2b-gitlab-ci:latest
+
+variables:
+  DOCKER_DRIVER: overlay
+
+services:
+  - docker:dind
+
+cache:
+  paths:
+    - node_modules/
+    - dist/
+
+stages:
+  - unit_test
+  - build-application
+
+before_script:
+  - cp /usr/app/.npmrc .
+
+test_ci:
+  stage: unit_test
+  script:
+    - npm install
+    - npm run test
+
+build_and_deploy:
+  stage: build-application
+  only:
+    refs:
+      - master
+  script:
+    - npm run build
+    - docker build -t registry.c2bsoftware.com.br/muven-tray-vtex:latest .
+    - docker push registry.c2bsoftware.com.br/muven-agent-vtex:latest
+    - kubectl scale --replicas=0 deployment muven-agent-vtex
+    - kubectl scale --replicas=1 deployment muven-agent-vtex
+  artifacts:
+    paths:
+      - dist/
+      - node_modules/

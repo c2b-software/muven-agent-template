@@ -1,0 +1,4 @@
+{
+    "docker.defaultRegistryPath": "registry.c2bsoftware.com.br",
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
