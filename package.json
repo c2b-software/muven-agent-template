@@ -21,7 +21,6 @@
     "@c2b/muven-core": "latest",
     "@c2b/sdk-tray": "latest",
     "@c2b/web-commons": "latest",
-    "@types/bluebird": "^3.5.25",
     "@types/moment": "^2.13.0",
     "@types/redis": "^2.8.14",
     "@types/soap": "^0.21.0",
