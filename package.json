@@ -21,19 +21,14 @@
     "@c2b/muven-core": "latest",
     "@c2b/sdk-tray": "latest",
     "@c2b/web-commons": "latest",
-    "@types/moment": "^2.13.0",
     "@types/redis": "^2.8.14",
-    "@types/soap": "^0.21.0",
-    "@types/xml2js": "^0.4.4",
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "jest": "^24.9.0",
     "moment": "^2.24.0",
-    "soap": "^0.25.0",
     "ts-node": "^8.3.0",
-    "typescript": "^3.7.3",
-    "xml2js": "^0.4.19"
+    "typescript": "^3.7.3"    
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
