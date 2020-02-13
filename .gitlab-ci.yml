@@ -31,10 +31,10 @@ build_and_deploy:
       - master
   script:
     - npm run build
-    - docker build -t registry.c2bsoftware.com.br/muven-tray-vtex:latest .
-    - docker push registry.c2bsoftware.com.br/muven-agent-vtex:latest
-    - kubectl scale --replicas=0 deployment muven-agent-vtex
-    - kubectl scale --replicas=1 deployment muven-agent-vtex
+    - docker build -t registry.c2bsoftware.com.br/__MUVEN-AGENT-NAME__:latest .
+    - docker push registry.c2bsoftware.com.br/__MUVEN-AGENT-NAME__:latest
+    - kubectl scale --replicas=0 deployment __MUVEN-AGENT-NAME__
+    - kubectl scale --replicas=1 deployment __MUVEN-AGENT-NAME__
   artifacts:
     paths:
       - dist/
