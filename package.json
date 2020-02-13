@@ -19,7 +19,7 @@
     "@c2b/muven-audit-core": "latest",
     "@c2b/muven-commons": "latest",
     "@c2b/muven-core": "latest",
-    "@c2b/sdk-tray": "latest",
+    "@c2b/__SDK-NAME__": "latest",
     "@c2b/web-commons": "latest",
     "@types/redis": "^2.8.14",
     "axios": "^0.19.0",

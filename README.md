@@ -18,6 +18,8 @@ $ cd muven-agent-whatever
 
 After running the above commands, you'll already have the base structure created and you'll be almost ready to go. But you'll still need to do some renamings.
 
+- __SDK-NAME__ has to be renamed to whatever SDK you're implementing (example: sdk-vtex, sdk-tray, sdk-mercado-livre, etc). Choose a lowercase naming;
+
 - __MUVEN-AGENT-NAME__ has to be renamed to whatever agent you're implementing (example: muven-agent-vtex, muven-agent-tray, muven-agent-mercado-livre, etc). Choose a lowercase naming;
 
 - __URL-TO-DOCS__ has to be renamed to the URL that has all the contract information. Endpoints, expected returned status, response payloads, request payloads, etc.
