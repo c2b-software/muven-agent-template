@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "__MUVEN-AGENT-NAME__",
+            "script": "./dist/index.js",
+            "instances": 1
+        }
+    ]
+}

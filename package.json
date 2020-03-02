@@ -5,6 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "jest",
+    "debug": "node ./src/__debug__/index.js",
     "build": "npm t && rm -rf dist tsc"
   },
   "repository": {
@@ -27,7 +28,6 @@
     "express-session": "^1.17.0",
     "jest": "^24.9.0",
     "moment": "^2.24.0",
-    "ts-node": "^8.3.0",
     "typescript": "^3.7.3"    
   },
   "devDependencies": {

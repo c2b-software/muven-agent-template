@@ -18,6 +18,8 @@ $ cd muven-agent-whatever
 
 After running the above commands, you'll already have the base structure created and you'll be almost ready to go. But you'll still need to do some renamings.
 
+- __NAME__ has to be renamed to whatever name you want to give to the sdk being created (Vtex, Tray, MercadoLivre, etc) - Notice this name will be used in imports and exports as well as in class namings, so choose a name that's a valid Typescript word (prefer MercadoLivre instead of Mercado Livre, for example).
+
 - __SDK-NAME__ has to be renamed to whatever SDK you're implementing (example: sdk-vtex, sdk-tray, sdk-mercado-livre, etc). Choose a lowercase naming;
 
 - __MUVEN-AGENT-NAME__ has to be renamed to whatever agent you're implementing (example: muven-agent-vtex, muven-agent-tray, muven-agent-mercado-livre, etc). Choose a lowercase naming;
