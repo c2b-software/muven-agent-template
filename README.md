@@ -32,7 +32,7 @@ After running the above commands, you'll already have the base structure created
 Last but not least, you have to install all the dependencies. Run:
 
 ```shell
-$ npm i
+$ yarn
 ```
 
 And now you're ready to roll. Have fun!
