@@ -21,8 +21,8 @@ before_script:
 test_ci:
   stage: unit_test
   script:
-    - npm install
-    - npm run test
+    - yarn
+    - yarn test
 
 build_and_deploy:
   stage: build-application
