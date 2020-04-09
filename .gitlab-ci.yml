@@ -12,7 +12,6 @@ cache:
     - dist/
 
 stages:
-  - unit_test
   - build-application
 
 before_script:
