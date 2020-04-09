@@ -18,19 +18,14 @@ stages:
 before_script:
   - cp /usr/app/.npmrc .
 
-test_ci:
-  stage: unit_test
-  script:
-    - yarn
-    - yarn test
-
 build_and_deploy:
   stage: build-application
   only:
     refs:
       - master
   script:
-    - npm run build
+    - yarn
+    - yarn build
     - docker build -t registry.c2bsoftware.com.br/__MUVEN-AGENT-NAME__:latest .
     - docker push registry.c2bsoftware.com.br/__MUVEN-AGENT-NAME__:latest
     - kubectl scale --replicas=0 deployment __MUVEN-AGENT-NAME__
