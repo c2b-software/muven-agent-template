@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "debug": "node ./src/__debug__/index.js",
-    "build": "npm t && rm -rf dist && tsc"
+    "build": "yarn test && rm -rf dist && tsc"
   },
   "repository": {
     "type": "git",
