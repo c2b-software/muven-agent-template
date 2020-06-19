@@ -1,0 +1,73 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  10.15.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://repo.c2bsoftware.com.br/@c2b%2f__SDK-NAME__: no such package available
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141720:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141642:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+    "name": "__MUVEN-AGENT-NAME__",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+      "test": "jest",
+      "debug": "node ./src/__debug__/index.js",
+      "build": "yarn test && rm -rf dist && tsc"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git@gitlab.com:dsn-c2b/middleware/__MUVEN-AGENT-NAME__.git"
+    },
+    "author": "C2B Software do Brasil LTDA",
+    "license": "ISC",
+    "dependencies": {
+      "@c2b/agent-commons": "latest",
+      "@c2b/commons": "latest",
+      "@c2b/muven-audit-core": "latest",
+      "@c2b/muven-commons": "latest",
+      "@c2b/muven-core": "latest",
+      "@c2b/__SDK-NAME__": "latest",
+      "@c2b/web-commons": "latest",
+      "@types/redis": "^2.8.14",
+      "axios": "^0.19.0",
+      "express": "^4.17.1",
+      "express-session": "^1.17.0",
+      "jest": "^24.9.0",
+      "moment": "^2.24.0",
+      "typescript": "^3.7.3"    
+    },
+    "devDependencies": {
+      "@types/express": "^4.17.1",
+      "@types/jest": "^24.0.18",
+      "ts-jest": "^25.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

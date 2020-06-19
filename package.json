@@ -17,6 +17,8 @@
   "dependencies": {
     "@c2b/agent-commons": "latest",
     "@c2b/commons": "latest",
+    "@c2b/commons-log": "latest",
+    "@c2b/management-core": "latest",
     "@c2b/muven-audit-core": "latest",
     "@c2b/muven-commons": "latest",
     "@c2b/muven-core": "latest",
@@ -28,7 +30,8 @@
     "express-session": "^1.17.0",
     "jest": "^24.9.0",
     "moment": "^2.24.0",
-    "typescript": "^3.7.3"    
+    "typeorm": "^0.2.24",
+    "typescript": "^3.7.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
