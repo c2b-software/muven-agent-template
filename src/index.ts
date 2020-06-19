@@ -34,7 +34,7 @@ app.get(`/`, async (req: Request, res: Response) => {
     }
 
     if (!pjson) {
-        throw new Error("Can't find package.json.")
+        throw new Error("Can't find package.json.");
     }
 
     const json = {
@@ -42,7 +42,7 @@ app.get(`/`, async (req: Request, res: Response) => {
         "version": pjson.version,
         "description": pjson.description,
         "author": pjson.author,
-    }
+    };
 
     res.status(200).json(json);
 });

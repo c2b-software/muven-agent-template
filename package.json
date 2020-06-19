@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:dsn-c2b/middleware/__MUVEN-AGENT-NAME__.git"
+    "url": "git@gitlab.com:dsn-c2b/middleware/agents/__MUVEN-AGENT-NAME__.git"
   },
   "author": "C2B Software do Brasil LTDA",
   "license": "ISC",
