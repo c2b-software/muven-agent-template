@@ -1,5 +1,5 @@
 import { Sdk__NAME__Facade } from "@c2b/__SDK-NAME__";
-import { __NAME__Helper } from "./order/utils/__NAME___helper";
+import { __NAME__Helper } from "./utils/helper";
 import { MuvenRequestOptions } from "@c2b/muven-commons";
 import { OrderService } from "./order/service/order_service";
 import { ProductService } from "./catalog/service/product_service";
