@@ -3,7 +3,7 @@ import { LockControl } from "@c2b/muven-core";
 import { EntityEnum, ChannelEnum } from "@c2b/muven-commons";
 import { httpDefaultHandle } from "@c2b/web-commons";
 import { __NAME__ServicesFacade } from "../../service_facade";
-import { __NAME__Helper } from "../../utils/__NAME__Helper";
+import { __NAME__Helper } from "../../utils/helper";
 
 export class HookEventEndpoint {
 

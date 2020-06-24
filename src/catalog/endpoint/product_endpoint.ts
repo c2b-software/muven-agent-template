@@ -2,7 +2,7 @@ import { EntityEnum, ChannelEnum } from "@c2b/muven-commons";
 import { LockControl } from "@c2b/muven-core";
 import { httpDefaultHandle } from "@c2b/web-commons";
 import { Request, Response, Router } from "express";
-import { __NAME__Helper } from "../../utils/__NAME__Helper";
+import { __NAME__Helper } from "../../utils/helper";
 import { ProductService } from "../service/product_service";
 
 export class ProductEndpoint {
