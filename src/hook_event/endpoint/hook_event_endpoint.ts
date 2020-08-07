@@ -21,7 +21,6 @@ export class HookEventEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
                     httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
                         return await __NAME__ServicesFacade.processHookEvents(req.requestDbOptions);
                     }, res);
                 });

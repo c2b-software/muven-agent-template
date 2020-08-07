@@ -4,6 +4,7 @@ import { httpDefaultHandle } from "@c2b/web-commons";
 import { Request, Response, Router } from "express";
 import { __NAME__Helper } from "../../utils/helper";
 import { OrderService } from "../service/order_service";
+import { __NAME__ServicesFacade } from "../../service_facade";
 
 export class OrderEndpoint {
 
@@ -20,8 +21,7 @@ export class OrderEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
                     httpDefaultHandle(async() => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new OrderService(req.requestDbOptions, facade).syncOrders();
+                        return await __NAME__ServicesFacade.syncOrders(req.requestDbOptions);
                     }, res);
                 });
             } catch(error) {
@@ -34,8 +34,7 @@ export class OrderEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
                     httpDefaultHandle(async() => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new OrderService(req.requestDbOptions, facade).syncOrderUpdate();
+                        return await __NAME__ServicesFacade.syncOrdersUpdate(req.requestDbOptions);
                     }, res);
                 });
             } catch (error) {
@@ -48,8 +47,7 @@ export class OrderEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
                     httpDefaultHandle(async() => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new OrderService(req.requestDbOptions, facade).syncSpecificOrdersByExternalId(req.body.orders);
+                        return await __NAME__ServicesFacade.syncSpecificOrders(req.body.orders, req.requestDbOptions);
                     }, res);
                 });
             } catch (error) {

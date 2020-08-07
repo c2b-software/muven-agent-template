@@ -6,6 +6,7 @@ import { ProductService } from "./catalog/service/product_service";
 import { BrandService } from "./catalog/service/brand_service";
 import { CategoryService } from "./catalog/service/category_service";
 import { ChannelDao } from "@c2b/muven-core";
+import { HookEventService } from "./hook_event/service/hook_event_service";
 
 export class __NAME__ServicesFacade {
 
@@ -19,6 +20,16 @@ export class __NAME__ServicesFacade {
         }
     }
     
+    static async syncOrders(dbOptions: MuvenRequestOptions) {
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const orderService = await this.getOrderService(requestOptions);
+    
+            await orderService.syncOrders();
+        }
+    }
+
     static async syncOrdersUpdate(dbOptions: MuvenRequestOptions) {
         const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
         

@@ -4,6 +4,7 @@ import { httpDefaultHandle } from "@c2b/web-commons";
 import { Request, Response, Router } from "express";
 import { __NAME__Helper } from "../../utils/helper";
 import { ProductService } from "../service/product_service";
+import { __NAME__ServicesFacade } from "../../service_facade";
 
 export class ProductEndpoint {
     private BASE_PATH: string = `/products`;
@@ -19,38 +20,20 @@ export class ProductEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
                     httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        const service = new ProductService(req.requestDbOptions, facade);
-                        return await service.sync(service.getProductSyncOptions());
+                        return await __NAME__ServicesFacade.syncProducts(req.requestDbOptions);
                     }, res);
                 });
             } catch (error) {
                 res.status(409).send(error);
                 throw error;
             }
-        });
-
-        router.post(`${this.BASE_PATH}/sync_categories`, async (req: Request, res: Response) => {
-            try {
-                await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
-                    httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new ProductService(req.requestDbOptions, facade).syncCategoryInfo();
-                    }, res);
-                });
-            } catch (error) {
-                res.status(409).send(error);
-                throw error;
-            }
-        
         });
         
         router.post(`${this.BASE_PATH}/sync_images`, async (req: Request, res: Response) => {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
                     httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new ProductService(req.requestDbOptions, facade).syncImageInfo();
+                        return await __NAME__ServicesFacade.syncProductsImages(req.requestDbOptions);
                     }, res);
                 });
             } catch (error) {
@@ -63,22 +46,7 @@ export class ProductEndpoint {
             try {
                 await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
                     httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new ProductService(req.requestDbOptions, facade).syncStockInfo();
-                    }, res);
-                });
-            } catch (error) {
-                res.status(409).send(error);
-                throw error;
-            }
-        });
-
-        router.post(`${this.BASE_PATH}/delete`, async (req: Request, res: Response) => {
-            try {
-                await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
-                    httpDefaultHandle(async () => {
-                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                        return await new ProductService(req.requestDbOptions, facade).deleteProduct(req.body.productId);
+                        return await __NAME__ServicesFacade.syncProductsStock(req.requestDbOptions);
                     }, res);
                 });
             } catch (error) {
