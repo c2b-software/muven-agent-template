@@ -17,14 +17,18 @@ export class HookEventEndpoint {
 
         const router: Router = Router();
 
-
         router.post(`${this.BASE_PATH}/process`, async (req: Request, res: Response) => {
-            await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
-                httpDefaultHandle(async () => {
-                    const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
-                    return await __NAME__ServicesFacade.processHookEvents(req.requestDbOptions);
-                }, res);
-            });
+            try {
+                await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Order, async () => {
+                    httpDefaultHandle(async () => {
+                        const facade = await __NAME__Helper.initialize__NAME__Facade(req.requestDbOptions);
+                        return await __NAME__ServicesFacade.processHookEvents(req.requestDbOptions);
+                    }, res);
+                });
+            } catch (error) {
+                res.status(409).send(error);
+                throw error;
+            }
         });
 
         return router;

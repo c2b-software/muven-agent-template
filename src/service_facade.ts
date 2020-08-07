@@ -1,67 +1,119 @@
 import { Sdk__NAME__Facade } from "@c2b/__SDK-NAME__";
 import { __NAME__Helper } from "./utils/helper";
-import { MuvenRequestOptions } from "@c2b/muven-commons";
+import { MuvenRequestOptions, ChannelEnum } from "@c2b/muven-commons";
 import { OrderService } from "./order/service/order_service";
 import { ProductService } from "./catalog/service/product_service";
 import { BrandService } from "./catalog/service/brand_service";
 import { CategoryService } from "./catalog/service/category_service";
+import { ChannelDao } from "@c2b/muven-core";
 
 export class __NAME__ServicesFacade {
 
     static async processHookEvents(dbOptions: MuvenRequestOptions) {
-        const hookEventService = await this.getHookEventService(dbOptions);
-
-        await hookEventService.processHookEvents();
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const hookEventService = await this.getHookEventService(requestOptions);
+    
+            await hookEventService.processHookEvents();
+        }
     }
     
     static async syncOrdersUpdate(dbOptions: MuvenRequestOptions) {
-        const orderService = await this.getOrderService(dbOptions);
-
-        await orderService.syncOrderUpdate();
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const orderService = await this.getOrderService(requestOptions);
+    
+            await orderService.syncOrderUpdate();
+        }
     }
 
     static async syncSpecificOrders(externalIds: string[], dbOptions: MuvenRequestOptions) {
-        const orderService = await this.getOrderService(dbOptions);
-
-        await orderService.syncSpecificOrdersByExternalId(externalIds);
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const orderService = await this.getOrderService(requestOptions);
+    
+            await orderService.syncSpecificOrdersByExternalId(externalIds);
+        }
     }
 
     static async syncCatalog(dbOptions: MuvenRequestOptions) {
-        const productService = await this.getProductService(dbOptions);
-        const categoryService = await this.getCategoryService(dbOptions);
-
-        await categoryService.sync();
-        await productService.sync(productService.getProductSyncOptions());
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const productService = await this.getProductService(requestOptions);
+            const categoryService = await this.getCategoryService(requestOptions);
+    
+            await categoryService.sync();
+            await productService.sync(productService.getProductSyncOptions());
+        }
     }
 
     static async syncProducts(dbOptions: MuvenRequestOptions) {
-        const productService = await this.getProductService(dbOptions);
-
-        await productService.sync(productService.getProductSyncOptions());
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const productService = await this.getProductService(dbOptions);
+    
+            await productService.sync(productService.getProductSyncOptions());
+        }
     }
 
     static async syncProductsImages(dbOptions: MuvenRequestOptions) {
-        const productService = await this.getProductService(dbOptions);
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const productService = await this.getProductService(requestOptions);
+    
+            await productService.syncImageInfo();
 
-        await productService.syncImageInfo();
+        }
     }
 
     static async syncProductsStock(dbOptions: MuvenRequestOptions) {
-        const productService = await this.getProductService(dbOptions);
-
-        await productService.syncStockInfo();
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const productService = await this.getProductService(requestOptions);
+    
+            await productService.syncStockInfo();
+        }
     }
 
     static async syncCategories(dbOptions: MuvenRequestOptions) {
-        const categoryService = await this.getCategoryService(dbOptions);
-
-        await categoryService.sync();
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const categoryService = await this.getCategoryService(requestOptions);
+    
+            await categoryService.sync();
+        }
     }
 
     static async syncBrands(dbOptions: MuvenRequestOptions) {
-        const brandService = await this.getBrandService(dbOptions);
+        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
+        
+        for (const requestOptions of requestOptionsList) {
+            const brandService = await this.getBrandService(requestOptions);
+    
+            await brandService.sync();
+        }
+    }
 
-        await brandService.sync();
+    private static async getRequestOptionsList(subscriberPublicKey: string): Promise<MuvenRequestOptions[]> {
+        const channelList = await new ChannelDao({subscriberPublicKey}).getByType(ChannelEnum.__NAME__);
+
+        const requestOptionsList: MuvenRequestOptions[] = [];
+        for (const channel of channelList) {
+            requestOptionsList.push(new MuvenRequestOptions({
+                idChannel: channel.id,
+                subscriberPublicKey,
+            }));
+        }
+
+        return requestOptionsList;
     }
 
     private static async get__NAME__Facade(dbOptions: MuvenRequestOptions): Promise<Sdk__NAME__Facade> {

@@ -17,15 +17,18 @@ export class CatalogEndpoint {
         const router: Router = Router();
 
         router.post(`${this.BASE_PATH}/sync`, async (req: Request, res: Response) => {
-
-            await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
-                httpDefaultHandle(async () => {
-                    const facade = await Helper.initializeFacade(req.requestDbOptions);
-                    await new CategoryService(req.requestDbOptions, facade).sync();
-                    await new ProductService(req.requestDbOptions, facade).sync({syncPendingBrand: false, syncPendingCategories: true});
-                }, res);
-            });
-        
+            try {
+                await LockControl.getInstance(this.ttl).lock(ChannelEnum[ChannelEnum.__NAME__], req.requestDbOptions.subscriberPublicKey, EntityEnum.Product, async () => {
+                    httpDefaultHandle(async () => {
+                        const facade = await __NAME__Helper.initializeFacade(req.requestDbOptions);
+                        await new CategoryService(req.requestDbOptions, facade).sync();
+                        await new ProductService(req.requestDbOptions, facade).sync({syncPendingBrand: false, syncPendingCategories: true});
+                    }, res);
+                });
+            } catch (error) {
+                res.status(409).send(error);
+                throw error;
+            }
         });
 
         return router;
