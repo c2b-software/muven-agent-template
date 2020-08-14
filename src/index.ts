@@ -12,7 +12,8 @@ import { CatalogEndpoint } from "./catalog/endpoint/catalog_endpoint";
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ROOT_API = "/agent-rest-api";
-const DEFAULT_TTL = 60 * 1000;
+const DEFAULT_TTL = 1 * 60 * 1000;
+const CATALOG_TTL = 3 * 60 * 1000;
 
 app.use(bodyParser.json());
 
@@ -54,7 +55,7 @@ app.listen(PORT, async () => {
 
 const router:Router = Router();
 app.use(`${ROOT_API}/`, router);
-router.use('/', new CatalogEndpoint(DEFAULT_TTL).add());
+router.use('/', new CatalogEndpoint(CATALOG_TTL).add());
 router.use('/', new ProductEndpoint(DEFAULT_TTL).add());
 router.use('/', new OrderEndpoint(DEFAULT_TTL).add());
 router.use('/', new HookEventEndpoint(DEFAULT_TTL).add());

@@ -54,11 +54,14 @@ export class __NAME__ServicesFacade {
         const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
         
         for (const requestOptions of requestOptionsList) {
+            const brandService = await this.getBrandService(requestOptions);
             const productService = await this.getProductService(requestOptions);
             const categoryService = await this.getCategoryService(requestOptions);
     
+            await brandService.sync();
             await categoryService.sync();
-            await productService.sync(productService.getProductSyncOptions());
+            await productService.sync();
+            await productService.syncStockInfo();
         }
     }
 
@@ -68,7 +71,7 @@ export class __NAME__ServicesFacade {
         for (const requestOptions of requestOptionsList) {
             const productService = await this.getProductService(dbOptions);
     
-            await productService.sync(productService.getProductSyncOptions());
+            await productService.sync();
         }
     }
 
@@ -135,9 +138,9 @@ export class __NAME__ServicesFacade {
         const orderService = await this.getOrderService(dbOptions);
         const productService = await this.getProductService(dbOptions);
         const categoryService = await this.getCategoryService(dbOptions);
-        // const brandService = await this.getBrandService(dbOptions);
+        const brandService = await this.getBrandService(dbOptions);
 
-        return new HookEventService(dbOptions, undefined, categoryService, productService, orderService);
+        return new HookEventService(dbOptions, brandService, categoryService, productService, orderService);
     }
 
     private static async getOrderService(dbOptions: MuvenRequestOptions): Promise<OrderService> {
