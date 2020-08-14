@@ -71,15 +71,6 @@ export class ProductService extends ProductBaseService<ProductDto, VariationDto,
         }
     }
 
-    protected async updateProductCategory(productCategoryChannel: ProductCategoryChannel, manager?: EntityManager): Promise<void> {
-        const product = await this.getEntityById(productCategoryChannel.idProduct, { store: true }, manager);
-
-        if (product && product.stores?.[0]?.channels?.[0]?.idExternalChannel) {
-            const productDto = await this.productAdapter.convertCategoryOnly(product);
-            await this.updateProductInChannel(productDto);
-        }
-    }
-
     protected async getPendingEntities(options?: IPendingByChannelOptions): Promise<Product[]> {
         throw new Error("Method not implemented.");
     }
