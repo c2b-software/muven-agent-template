@@ -8,6 +8,7 @@ import { ProductEndpoint } from "./catalog/endpoint/product_endpoint";
 import { OrderEndpoint } from "./order/endpoint/order_endpoint";
 import { HookEventEndpoint } from "./hook_event/endpoint/hook_event_endpoint";
 import { CatalogEndpoint } from "./catalog/endpoint/catalog_endpoint";
+import { AuthEndpoint } from "./auth/endpoint/auth_endpoint";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -55,6 +56,7 @@ app.listen(PORT, async () => {
 
 const router:Router = Router();
 app.use(`${ROOT_API}/`, router);
+router.use('/', new AuthEndpoint(CATALOG_TTL).add());
 router.use('/', new CatalogEndpoint(CATALOG_TTL).add());
 router.use('/', new ProductEndpoint(DEFAULT_TTL).add());
 router.use('/', new OrderEndpoint(DEFAULT_TTL).add());

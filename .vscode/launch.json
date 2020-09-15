@@ -15,6 +15,11 @@
             },
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
+            ],
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/node_modules/**/*.js",
+                "${workspaceFolder}/!node_modules/@c2b/**/*.js",
             ]
         }
     ]
