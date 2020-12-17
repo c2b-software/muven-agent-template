@@ -54,6 +54,8 @@ app.listen(PORT, async () => {
     console.log(`[__MUVEN-AGENT-NAME__] <===> http://localhost:${PORT}`);
 });
 
+__NAME__Worker.initialize(ChannelEnum.__NAME__, __NAME__Worker);
+
 const router:Router = Router();
 app.use(`${ROOT_API}/`, router);
 router.use('/', new AuthEndpoint(CATALOG_TTL).add());
