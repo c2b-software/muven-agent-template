@@ -51,18 +51,37 @@ export class __NAME__ServicesFacade {
     }
 
     static async syncCatalog(dbOptions: MuvenRequestOptions) {
-        const requestOptionsList = await this.getRequestOptionsList(dbOptions.subscriberPublicKey);
         
-        for (const requestOptions of requestOptionsList) {
-            const brandService = await this.getBrandService(requestOptions);
-            const productService = await this.getProductService(requestOptions);
-            const categoryService = await this.getCategoryService(requestOptions);
+        const brandService = await this.getBrandService(dbOptions);
+        await brandService.sync(async () => {
+
+            const categoryService = await this.getCategoryService(dbOptions);
+            return await categoryService.sync(async () => {
+
+                return await categoryService.syncProductCategory(async () => {
+
+                    const productService = await this.getProductService(dbOptions);
+
+                    return await productService.processUnsynced(async () => {
+                        
+                        return await productService.sync(async () => {
     
-            await brandService.sync();
-            await categoryService.sync();
-            await productService.sync();
-            await productService.syncStockInfo();
-        }
+                            return await productService.syncStockInfo(async () => {
+    
+                                return await productService.syncImageInfo();
+    
+                            });
+    
+                        });
+
+                    });
+
+                });
+
+            });
+
+        });
+
     }
 
     static async syncProducts(dbOptions: MuvenRequestOptions) {
