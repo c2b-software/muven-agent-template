@@ -1,14 +1,12 @@
-import { AgentOperationEnum } from "@c2b/agent-commons";
-import { EntityEnum, MuvenRequestOptions } from "@c2b/muven-commons";
-import { LockControl } from "@c2b/muven-core";
+import { ChannelEnum, MuvenRequestOptions } from "@c2b/muven-commons";
 import bodyParser from 'body-parser';
 import express, { Request, Response, Router } from 'express';
-import { __NAME__ServicesFacade } from "./services_facade";
-import { ProductEndpoint } from "./catalog/endpoint/product_endpoint";
-import { OrderEndpoint } from "./order/endpoint/order_endpoint";
-import { HookEventEndpoint } from "./hook_event/endpoint/hook_event_endpoint";
-import { CatalogEndpoint } from "./catalog/endpoint/catalog_endpoint";
 import { AuthEndpoint } from "./auth/endpoint/auth_endpoint";
+import { CatalogEndpoint } from "./catalog/endpoint/catalog_endpoint";
+import { ProductEndpoint } from "./catalog/endpoint/product_endpoint";
+import { HookEventEndpoint } from "./hook_event/endpoint/hook_event_endpoint";
+import { OrderEndpoint } from "./order/endpoint/order_endpoint";
+import { __NAME__Worker } from "./worker/worker";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
